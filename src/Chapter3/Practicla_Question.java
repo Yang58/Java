@@ -2,8 +2,6 @@ package Chapter3;
 
 import java.util.Scanner;
 
-import javax.xml.transform.Source;
-
 public class Practicla_Question {
 	static Scanner sc = new Scanner(System.in);
 
@@ -155,55 +153,55 @@ public class Practicla_Question {
 			System.out.println();
 		}
 	}
-	
+
 	static void Q13() {
-		
-		for(int i = 0 ; i < 100 ; i++) {
-			int count=0;
-			if((i%10==3) ||(i%10==6 )|| (i%10 == 9)) 
+
+		for (int i = 0; i < 100; i++) {
+			int count = 0;
+			if ((i % 10 == 3) || (i % 10 == 6) || (i % 10 == 9))
 				count++;
-			if((i/10==3) || (i/10==6) || (i/10 == 9)) 
+			if ((i / 10 == 3) || (i / 10 == 6) || (i / 10 == 9))
 				count++;
-			if(count == 1) {
+			if (count == 1) {
 				System.out.println("짝");
-			}else if(count ==2) {
+			} else if (count == 2) {
 				System.out.println("짝짝");
 			}
-			
+
 		}
 	}
-	
+
 	static void Q14() {
-		String course[] = { "java" , "C++" , "HTML5" , "컴퓨터구조" , "안드로이드"};
-		int score[] = { 95,88,76,62,55};
-		while(true) {
+		String course[] = { "java", "C++", "HTML5", "컴퓨터구조", "안드로이드" };
+		int score[] = { 95, 88, 76, 62, 55 };
+		while (true) {
 			System.out.print("과목명 >> ");
 			String sub = sc.next();
-			if(sub.equals("그만")) {
+			if (sub.equals("그만")) {
 				System.out.println("종료");
 				break;
 			}
-			for(int i = 0 ; i < course.length ; i++	) {
-				if(course[i].equals(sub)) {
-					System.out.println(sub + "의 점수는 > " +score[i]);
+			for (int i = 0; i < course.length; i++) {
+				if (course[i].equals(sub)) {
+					System.out.println(sub + "의 점수는 > " + score[i]);
 					break;
 				}
 			}
 			sc.nextLine();
 		}
 	}
-	
+
 	static void Q15() {
 		System.out.print("곱하고자 하는 두 수 입력 >> ");
-		while(true) {
-			
+		while (true) {
+
 			try {
 				int n = sc.nextInt();
 				int m = sc.nextInt();
-				if(n == 0) {
+				if (n == 0) {
 					break;
 				}
-				System.out.println(n + " X " + m +" = " + n*m);
+				System.out.println(n + " X " + m + " = " + n * m);
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("실수는 입력하면 안됩니다.");
@@ -212,49 +210,45 @@ public class Practicla_Question {
 		}
 		sc.close();
 	}
+
 	static void Q16() {
-		String str[] = {"가위","바위","보"};
+		String[] str = { "가위", "바위", "보" };
 		System.out.println("가위 바위 보 게임을 시작합니다.");
-		while(true) {
-			int str_random = (int)(Math.random()*3);
+		while (true) {
+			int str_random = (int) (Math.random() * 3);
 			System.out.print("가위 바위 보 >>");
 			String user = sc.next();
-			if(user.equals("그만")) {
+			if (user.equals("그만")) {
 				System.out.println("게임을 종료합니다.");
 				break;
 			}
-			switch(str_random) {
-			case 0: // com 가위 
-				if(user.equals("가위")) {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 가위 , 비겼습니다");
-				}else if(user.equals("바위")){
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 가위 , 사용자가 이겼습니다.");
-				}else {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 가위 , 사용자가 졌습니다.");
+
+			if (str[str_random].equals("가위")) {
+				if (user.equals("가위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 가위 , 비겼습니다");
+				} else if (user.equals("바위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 가위 , 사용자가 이겼습니다.");
+				} else {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 가위 , 사용자가 졌습니다.");
 				}
-				break;
-			case 1: // com 바위
-				if(user.equals("가위")) {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 바위 , 사용자가 졌습니다.");
-				}else if(user.equals("바위")){
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 바위 , 비겼습니다");
-				}else {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 바위 , 사용자가 이겼습니다.");
+			} else if (str[str_random].equals("바위")) {
+				if (user.equals("가위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 바위 , 사용자가 졌습니다.");
+				} else if (user.equals("바위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 바위 , 비겼습니다");
+				} else {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 바위 , 사용자가 이겼습니다.");
 				}
-				break;
-			case 2: // com 보
-				if(user.equals("가위")) {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 보 , 사용자가 이겼습니다.");
-				}else if(user.equals("바위")){
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 보 , 사용자가 졌습니다.");
-				}else {
-					System.out.println("사용자 >> " + user +", 컴퓨터 >> 보 , 비겼습니다");
+			} else {
+				if (user.equals("가위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 보 , 사용자가 이겼습니다.");
+				} else if (user.equals("바위")) {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 보 , 사용자가 졌습니다.");
+				} else {
+					System.out.println("사용자 >> " + user + ", 컴퓨터 >> 보 , 비겼습니다");
 				}
-				break;
 			}
-			
 		}
-	
 	}
 
 	public static void main(String[] args) {
