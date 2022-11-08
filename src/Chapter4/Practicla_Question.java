@@ -175,6 +175,8 @@ class CircleManager{
 	private double x,y;
 	private int radius;
 	
+	CircleManager(){	}
+	
 	public CircleManager(double x, double y , int radius) {
 		this.x = x;
 		this.y = y;
@@ -185,8 +187,18 @@ class CircleManager{
 		System.out.println("( " + this.x + " , " + this.y + " )" + this.radius);
 	}
 	
-	public void BigCircle() {
-		
+	public void BigCircle(CircleManager[] cm) {
+		if(cm[0].radius>cm[1].radius&&cm[0].radius>cm[2].radius) {
+			cm[0].show();
+		}
+		else if (cm[1].radius>cm[0].radius&&cm[1].radius>cm[2].radius) {
+			cm[1].show();
+		}
+		else {
+			cm[2].show();
+		}
+
+
 	}
 	public void run() {
 		Scanner sc = new Scanner(System.in);
@@ -200,9 +212,8 @@ class CircleManager{
 			c[i] = new CircleManager(x,y,radius);
 		}
 		
-		for(int i = 0 ; i < c.length ; i++) {
-			c[i].show();
-		}
+		System.out.print("가장 면적이 큰 원은 ");
+		BigCircle(c);
 		sc.close();
 	}
 }
@@ -210,6 +221,7 @@ class CircleManager{
 public class Practicla_Question {
 
 	public static void main(String[] args) {
-
+		CircleManager cm = new CircleManager();
+		cm.run();
 	}
 }
