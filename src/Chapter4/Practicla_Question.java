@@ -178,6 +178,7 @@ class Circle {
 		sc.close();
 	}
 }
+
 //-------------------------------------------------------------------------------------------
 // Q6
 class CircleManager {
@@ -257,44 +258,44 @@ class MonthSchedule {
 	MonthSchedule(int day) {
 		this.day = day;
 		this.DaySchedule = new Day[this.day];
-		for(int i = 0 ; i < DaySchedule.length ; i++) {
+		for (int i = 0; i < DaySchedule.length; i++) {
 			DaySchedule[i] = new Day();
 		}
 	}
 
 	void input() {
 		System.out.println("스케쥴을 입력합니다");
-		System.out.print("날짜 ( 1 ~ "+ day + " )? >> ");
+		System.out.print("날짜 ( 1 ~ " + day + " )? >> ");
 		int n = sc.nextInt();
-		System.out.println(DaySchedule[n-1].get());
-		if(DaySchedule[n-1].get() == null) {
+		System.out.println(DaySchedule[n - 1].get());
+		if (DaySchedule[n - 1].get() == null) {
 			System.out.print("할일 입력 >> ");
 			String work = sc.next();
-			DaySchedule[n-1].set(work);
+			DaySchedule[n - 1].set(work);
 			sc.nextLine();
-		}else if(DaySchedule[n-1].get() != null){
+		} else if (DaySchedule[n - 1].get() != null) {
 			System.out.println("할일이 이미 있습니다. !! ");
-			System.out.print("["+ n + "] 일의 ");
-			DaySchedule[n-1].show();
+			System.out.print("[" + n + "] 일의 ");
+			DaySchedule[n - 1].show();
 		}
 	}
 
 	void view() {
 		System.out.println("1. 전체 스케쥴 보기  2. 하루 스케쥴 보기 ");
 		int sel = sc.nextInt();
-		switch(sel) {
+		switch (sel) {
 		case 1:
-			// 전체 보기 
-			for(int i = 0 ; i < DaySchedule.length ; i++) {
-				System.out.print("["+ (i+1) + "] 일의 ");
+			// 전체 보기
+			for (int i = 0; i < DaySchedule.length; i++) {
+				System.out.print("[" + (i + 1) + "] 일의 ");
 				DaySchedule[i].show();
 			}
 			break;
 		case 2:
 			System.out.print("날짜 >> ");
 			int n = sc.nextInt();
-			System.out.print("["+ n + "] 일의 ");
-			DaySchedule[n-1].show();
+			System.out.print("[" + n + "] 일의 ");
+			DaySchedule[n - 1].show();
 			sc.nextLine();
 			break;
 		}
@@ -321,17 +322,467 @@ class MonthSchedule {
 				finish();
 				break loop;
 			}
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+//Q8
+class Phone {
+	private String name;
+	private String tel;
+
+	public Phone(String name, String tel) {
+		this.name = name;
+		this.tel = tel;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+}
+
+class PhoneBook {
+	Scanner sc = new Scanner(System.in);
+	Phone p[];
+
+	int sreach(String name) {
+		for (int i = 0; i < p.length; i++) {
+			if (p[i].getName().equals(name)) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	public void run() {
+		System.out.println("인원 수 : ");
+		int person = sc.nextInt();
+		p = new Phone[person];
+		for (int i = 0; i < p.length; i++) {
+			System.out.print("이름과 전화번호 >>");
+			String name = sc.next();
+			String tel = sc.next();
+			p[i] = new Phone(name, tel);
+		}
+		System.out.println("저장되었습니다. ");
+		loop: while (true) {
+			System.out.print("검색할 이름 : ");
+			String src_name = sc.next();
+			if (src_name.equals("그만")) {
+				System.out.println("PhoneBook 종료");
+				break loop;
+			}
+			int index = sreach(src_name);
+			System.out.println(p[index].getName() + "의 번호는 " + p[index].getTel() + "입니다. ");
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+//Q9
+
+class ArrayUtil {
+	public static int[] concat(int[] a, int[] b) {
+
+		System.out.println(a.length + " " + b.length);
+		int size = a.length + b.length;
+		int[] c = new int[size];
+
+		for (int i = 0; i < a.length; i++) {
+			c[i] = a[i];
+		}
+		for (int i = 0; i < b.length; i++) {
+			c[a.length + i] = b[i];
+		}
+
+		return c;
+
+	}
+
+	public static void print(int[] a) {
+		System.out.print("[ ");
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i] + " ");
+		}
+		System.out.print(" ]");
+
+	}
+}
+
+class StaticEx {
+
+	public void run() {
+		int[] array1 = { 1, 5, 7, 9 };
+		int[] array2 = { 3, 6, -1, 100, 77 };
+		int[] array3 = ArrayUtil.concat(array1, array2);
+		ArrayUtil.print(array3);
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+//Q10
+class Dictionary {
+	private static String[] kor = { "사랑", " 아기", "돈", "미래", "희망" };
+	private static String[] eng = { "love", "baby", "money", "future", "hope" };
+
+	public static String kor2Eng(String word) {
+		// 검색 코드
+		for (int i = 0; i < kor.length; i++) {
+			if (kor[i].equals(word)) {
+				return eng[i];
+			}
+		}
+		return null;
+	}
+}
+
+class DicApp {
+
+	Scanner sc = new Scanner(System.in);
+	{
+		System.out.println("한영 단어 검색 프로그램 입니다. ");
+	}
+
+	public void run() {
+
+		loop: while (true) {
+			System.out.print("한글 단어 >> ");
+			String word = sc.next();
+			if (word.equals("그만")) {
+				System.out.println("종료합니다");
+				break loop;
+			}
+
+			String Engword = Dictionary.kor2Eng(word);
+			if (Engword == null) {
+				System.out.println(word + "는 저의 사전에 없습니다. ");
+				continue loop;
+			}
+
+			System.out.println(word + "은(는)  " + Engword + " 입니다. ");
+
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+//Q11
+
+class Add {
+	int a;
+	int b;
+
+	void setvalue(int a, int b) {
+		this.a = a;
+		this.b = b;
+	}
+
+	int calculate() {
+		return a + b;
+	}
+}
+
+class Sub {
+	int a;
+	int b;
+
+	void setvalue(int a, int b) {
+		this.a = a;
+		this.b = b;
+	}
+
+	int calculate() {
+		return a - b;
+	}
+
+}
+
+class Mul {
+	int a;
+	int b;
+
+	void setvalue(int a, int b) {
+		this.a = a;
+		this.b = b;
+	}
+
+	int calculate() {
+		return a * b;
+	}
+
+}
+
+class Div {
+	int a;
+	int b;
+
+	void setvalue(int a, int b) {
+		this.a = a;
+		this.b = b;
+	}
+
+	int calculate() {
+		return this.a / this.b;
+	}
+}
+
+class Calculate {
+	Scanner sc = new Scanner(System.in);
+	Add a = new Add();
+	Sub s = new Sub();
+	Mul m = new Mul();
+	Div d = new Div();
+
+	{
+		System.out.println("계산 프로그램 ");
+	}
+
+	public void run() {
+		System.out.print("두 정수와 연산자를 입력하세요 > ");
+		int x = sc.nextInt();
+		int y = sc.nextInt();
+		String op = sc.next();
+
+		switch (op) {
+		case "+":
+			a.setvalue(x, y);
+			System.out.println(a.calculate());
+			break;
+		case "-":
+			s.setvalue(x, y);
+			System.out.println(s.calculate());
+			break;
+		case "*":
+			m.setvalue(x, y);
+			System.out.println(m.calculate());
+			break;
+		case "/":
+			d.setvalue(x, y);
+			System.out.println(d.calculate());
+			break;
+		}
+	}
+
+}
+
+//-------------------------------------------------------------------------------------------
+//Q12
+
+class Concert {
+	Scanner sc = new Scanner(System.in);
+	Concert_System CS[] = new Concert_System[3];
+	int Line;
+	String name;
+	String LineCheck;
+
+	{
+		for (int i = 0; i < CS.length; i++) {
+			CS[i] = new Concert_System();
+		}
+		System.out.println("================================");
+		System.out.println("=== 명품 콘서트홀 예약 시스템입니다. ===");
+		System.out.println("================================");
+	}
+
+	public void run() {
+		
+		loop: while (true) {
+			
+			System.out.print("1.예약  2.조회  3.예약취소  4.종료  >> ");
+			int menu = sc.nextInt();
+			if (menu >= 1 && menu <= 4) {
+				switch (menu) {
+				case 1:
+					// 예약
+					loop1:while(true) {
+						System.out.print("좌석 구분 : (1~3) : [1.S]  [2.A]  [3.B]  >> ");
+						Line = sc.nextInt();
+						
+						if(Line < 4 && Line > 0) {
+							LineCheck = CS[Line - 1].LineCheck(Line);
+							System.out.print(LineCheck + " ");
+
+							for (int i = 0; i < CS[Line - 1].SeatLine.length; i++) {
+								System.out.print(CS[Line - 1].SeatLine[i] + " ");
+							}
+							
+							System.out.println();
+							System.out.print("이름 >> ");
+							name = sc.next();
+							
+							System.out.print("좌석 번호 (1~10) >> ");
+							int seat = sc.nextInt();
+							if(0 < seat && seat < 11) {
+
+								LineCheck = CS[Line - 1].LineCheck(Line);
+								System.out.print(LineCheck + " ");
+
+								CS[Line - 1].Reserve(seat, name);
+								break loop1;
+							}else { // seat if 
+								System.out.println("1 ~ 10번 좌석중에 골라주세요 ");
+								continue loop1;
+							}
+						}else { // Line if 
+							System.out.println("1 ~ 3번 라인을 골라주세요 ");
+							continue loop1;
+						}
+						
+					}
+				
+					break;
+
+				case 2:
+
+					// 조회
+					for (int i = 0; i < 3; i++) {
+						LineCheck = CS[i].LineCheck(i + 1);
+						System.out.print(LineCheck + " ");
+
+						for (int j = 0; j < CS[i].SeatLine.length; j++) {
+							System.out.print(CS[i].SeatLine[j] + " ");
+						}
+						System.out.println();
+					}
+					System.out.println("<<< 조회를 완료하였습니다 >>>");
+					break;
+
+				case 3:
+
+					// 취소
+					lop: while (true) {
+						System.out.print("좌석 구분 (1~3) : [1.S]  [2.A]  [3.B]  >> ");
+						Line = sc.nextInt();
+						LineCheck = CS[Line - 1].LineCheck(Line);
+						System.out.print(LineCheck + " ");
+
+						for (int i = 0; i < CS[Line - 1].SeatLine.length; i++) {
+							System.out.print(CS[Line - 1].SeatLine[i] + " ");
+						}
+
+						System.out.println();
+						System.out.print("이름 >> ");
+						name = sc.next();
+
+						LineCheck = CS[Line - 1].LineCheck(Line);
+						System.out.print(LineCheck + " ");
+
+						boolean b = CS[Line - 1].ReserveCancel(name);
+						System.out.println();
+						if (b) {
+							System.out.println(CS[Line - 1].name + "님 예약 취소되었습니다. ");
+							break lop;
+						} else {
+							System.out.println(name + "님 예약자가 아닙니다. 다시한번 확인해주세요 . ");
+							System.out.println("예약 취소를 계속 하시겠습니까 ? (Y/N)");
+							String ans = sc.next();
+							if (ans.equals("Y")) {
+								continue lop;
+							} else {
+								System.out.println("메인화면으로 돌어갑니다. ");
+								break lop;
+							}
+
+						}
+					}
+
+					break;
+				case 4:
+
+					// 종료
+					System.out.println("프로그램을 종료합니다.");
+					break loop;
+				}
+			} else {
+				System.out.println(" 1~4번 중에 골라주세요 !!!");
+			}
 
 		}
 
 	}
 }
-//-------------------------------------------------------------------------------------------
+
+class Concert_System {
+
+	Scanner sc = new Scanner(System.in);
+	String[] SeatLine = new String[10];
+	String name;
+	int seatNum;
+
+	{
+		for (int i = 0; i < 10; i++) {
+			SeatLine[i] = "---";
+		}
+	}
+
+	public String LineCheck(int LineNum) {
+
+		if (LineNum == 1) {
+			return "S >> ";
+		} else if (LineNum == 2) {
+			return "A >> ";
+		} else {
+			return "B >> ";
+		}
+
+	}
+
+	public void Reserve(int Seat_Num, String name) {
+
+		if (SeatLine[Seat_Num - 1].equals("---")) {
+			SeatLine[Seat_Num - 1] = name;
+			for (int i = 0; i < SeatLine.length; i++) {
+				System.out.print(SeatLine[i] + " ");
+			}
+			System.out.println();
+			System.out.println("[" + name + "님 /" + Seat_Num + "번 좌석] 예약 완료 ");
+		} else {
+			System.out.println("이미 예약된 좌석입니다.");
+		}
+
+	}
+
+	public void SeatCheck() {
+
+		for (int i = 0; i < SeatLine.length; i++) {
+			System.out.print(SeatLine[i] + " ");
+		}
+
+	}
+
+	public boolean ReserveCancel(String name) {
+
+		for (int i = 0; i < SeatLine.length; i++) {
+			if (SeatLine[i].equals(name)) {
+				SeatLine[i] = "---";
+				System.out.print(SeatLine[i] + " ");
+				return true;
+			} else {
+				System.out.print(SeatLine[i] + " ");
+			}
+		}
+		return false;
+
+	}
+}
 
 public class Practicla_Question {
 
 	public static void main(String[] args) {
-		MonthSchedule april = new MonthSchedule(30);
-		april.run();
+		Concert c = new Concert();
+		c.run();
 	}
 }
