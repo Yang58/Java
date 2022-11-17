@@ -217,9 +217,86 @@ class Point3D extends Point {
 		return "(" + getX() + "," + getY() + "," + this.z + ")의 점";
 	}
 }
+//Q8
+class PositivePoint extends Point{
 
+	int x , y ;
+	public PositivePoint() {
+		super(0,0);
+	}
+	
+	public PositivePoint(int x, int y) {
+		super(x, y);
+		
+		if(x<0 && y<0) {
+			super.move(0, 0);
+		}else {
+			super.move(x,y);
+		}
+	}
+	
+	@Override
+	public void move(int x, int y) {
+		if(x>0 && y > 0) {
+			super.move(x,y);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "("+getX() + "," +getY()+")" +"의 점";
+	}
+}
 
 //------------------------------------------------------------------
+//Q9
+
+interface Stack{
+	int length();
+	int capacity();
+	String pop();
+	boolean push(String val);
+}
+class StringStack implements Stack{
+	
+	String stack[];
+	int size;
+	int top ;
+	
+	StringStack(int size){
+		this.size = size;
+		stack = new String[this.size];
+		top = this.size;
+	}
+	
+	public int length() {
+		return size - top;
+	}
+
+	@Override
+	public int capacity() {
+		return top;
+	}
+
+	@Override
+	public String pop() {
+		int temp = top;
+		top++;
+		return stack[temp];
+	}
+
+	@Override
+	public boolean push(String val) {
+		
+		if(top > 0) {
+			stack[top-1] = val;
+			top--;
+			return true;
+		}else {
+			return false;
+		}
+	}
+}
 //------------------------------------------------------------------
 //------------------------------------------------------------------
 //------------------------------------------------------------------
@@ -236,6 +313,7 @@ class Point3D extends Point {
 public class Practicla_Question {
 
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 //		//------------------------------------------------------------------		
 //		ColorTV myTV = new ColorTV(32,1024);
 //		myTV.printProperty();
@@ -275,10 +353,30 @@ public class Practicla_Question {
 		System.out.println(p.toString()+" 입니다.");
 
 		//------------------------------------------------------------------
+		
+		PositivePoint p1 = new PositivePoint();
+		p1.move(10, 10);
+		System.out.println(p1.toString() + "입니다.");
+		
+		p1.move(-5, 5);
+		System.out.println(p1.toString() + "입니다.");
+
+		PositivePoint p2 = new PositivePoint(-10, -10);
+		System.out.println(p2.toString() + "입니다.");
+		
 		//------------------------------------------------------------------
+	
+		System.out.print("스택 저장 공간 크기 입력 >> ");
+		int size = sc.nextInt(); 
+		
+		StringStack stk = new StringStack(size);
+		
 		//------------------------------------------------------------------
 		//------------------------------------------------------------------
 		
+		
+		
+		sc.close();
 	}
 
 }
